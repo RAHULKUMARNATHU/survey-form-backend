@@ -4,8 +4,13 @@ const rateLimit = require("express-rate-limit");
 const globalErrorHandler = require("./controllers/errorController");
 const mongoSanitize = require("express-mongo-sanitize");
 const AppError = require("./utils/appError");
+const cors = require("cors");
 
 const app = express();
+
+app.set("trust proxy", "loopback");
+app.use(cors());
+app.options("*", cors());
 
 /*Development Logging */
 if (process.env.NODE_ENV === "development") {
